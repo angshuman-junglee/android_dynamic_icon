@@ -24,7 +24,7 @@ abstract class AndroidDynamicIconPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  Future<void> initialize({required List<String> classNames}) async {
+  Future<void> initialize({required Map<String, dynamic> data}) async {
     throw UnimplementedError('initialize() has not been implemented.');
   }
 

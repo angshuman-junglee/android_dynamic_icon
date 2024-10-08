@@ -32,6 +32,7 @@ public class MethodCallImplementation implements MethodCallHandler {
   private static List<String> classNames = null;
   private static boolean iconChanged = false;
   private static List<String> args =  new ArrayList<>();
+  private static String packageName = null;
 
   MethodCallImplementation(Context context, Activity activity) {
     this.context = context;
@@ -47,7 +48,8 @@ public class MethodCallImplementation implements MethodCallHandler {
       switch (call.method) {
         case "initialize":
           {
-              classNames = call.arguments();
+              // classNames = call.arguments();
+              initialize(call);
               break;
           }
         case "changeIcon":
@@ -60,6 +62,18 @@ public class MethodCallImplementation implements MethodCallHandler {
             break;
       }
   }
+
+  private void initialize(MethodCall call) {
+    Map<String, Object> arguments = call.arguments();
+    Log.d(TAG, "Initializing AndroidDynamicIconPlugin with arguments: " + arguments);
+    if (arguments.containsKey("classNames") && arguments.containsKey("packageName")) {
+        classNames = (List<String>) arguments.get("classNames");
+        packageName = (String) arguments.get("packageName");
+        Log.d(TAG, "Initialization successful with class names: " + classNames + " and package name: " + packageName);
+    } else {
+        Log.e(TAG, "Initialization failed! Make sure to pass both 'classNames' and 'packageName'.");
+    }
+}
 
   private void changeIcon(MethodCall call) {
         if(classNames == null || classNames.isEmpty()) {
@@ -76,7 +90,7 @@ public class MethodCallImplementation implements MethodCallHandler {
     if (iconChanged){
         String className = args.get(0);
         PackageManager pm = activity.getPackageManager();
-        String packageName = activity.getPackageName();
+        // String packageName = activity.getPackageName();
         int componentState = PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
         int i=0;
         for(;i<classNames.size();i++) {
