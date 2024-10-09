@@ -1,9 +1,9 @@
 import 'android_dynamic_icon_platform_interface.dart';
 
 class AndroidDynamicIcon {
-  static Future<void> initialize({required Map<String, dynamic> data}) async {
+  static Future<void> initialize({required List<String> classNames}) async {
     await AndroidDynamicIconPlatform.instance
-        .initialize(data: data);
+        .initialize(classNames: classNames);
   }
 
   Future<void> changeIcon({required List<String> classNames}) async {

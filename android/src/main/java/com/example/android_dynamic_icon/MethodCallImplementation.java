@@ -48,8 +48,8 @@ public class MethodCallImplementation implements MethodCallHandler {
       switch (call.method) {
         case "initialize":
           {
-              // classNames = call.arguments();
-              initialize(call);
+              classNames = call.arguments();
+              // initialize(call);
               break;
           }
         case "changeIcon":
@@ -90,17 +90,14 @@ public class MethodCallImplementation implements MethodCallHandler {
     if (iconChanged){
         String className = args.get(0);
         PackageManager pm = activity.getPackageManager();
-        // String packageName = activity.getPackageName();
+        String packageName = activity.getPackageName();
         int componentState = PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
         int i=0;
-        for(;i<classNames.size();i++) {
-            ComponentName cn = new ComponentName(packageName, packageName+"."+classNames.get(i));
-            if(className.equals(classNames.get(i))) {
-                componentState = PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
-            }
-            else{
-                componentState = PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
-            }
+        for (String alias : classNames) {
+            ComponentName cn = new ComponentName(packageName, alias);
+            componentState = className.equals(alias) 
+                                 ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED 
+                                 : PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
             pm.setComponentEnabledSetting(cn, componentState, PackageManager.DONT_KILL_APP);
         }
 

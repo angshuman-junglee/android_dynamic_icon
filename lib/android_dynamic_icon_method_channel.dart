@@ -10,8 +10,8 @@ class MethodChannelAndroidDynamicIcon extends AndroidDynamicIconPlatform {
   final methodChannel = const MethodChannel('AndroidDynamicIcon');
 
   @override
-  Future<void> initialize({required Map<String, dynamic> data}) async {
-    await methodChannel.invokeMethod("initialize", data);
+  Future<void> initialize({required List<String> classNames}) async {
+    await methodChannel.invokeMethod("initialize", classNames);
   }
 
   @override
