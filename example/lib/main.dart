@@ -17,8 +17,10 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-    AndroidDynamicIcon.initialize(
-        classNames: ['MainActivity', 'ExampleIconActivity']);
+    AndroidDynamicIcon.initialize(classNames: [
+      'com.example.android_dynamic_icon_example.IconOne',
+      'com.example.android_dynamic_icon_example.IconDefault',
+    ]);
     super.initState();
   }
 
@@ -31,8 +33,10 @@ class _MyAppState extends State<MyApp> {
         ),
         body: GestureDetector(
           onTap: () async {
-            await _androidDynamicIconPlugin
-                .changeIcon(classNames: ['ExampleActivity', '']);
+            await _androidDynamicIconPlugin.changeIcon(classNames: [
+              'com.example.android_dynamic_icon_example.IconOne',
+              ''
+            ]);
             // To change icon back to default one.
             // await _androidDynamicIconPlugin
             //     .changeIcon(classNames: ['MainActivity', '']);

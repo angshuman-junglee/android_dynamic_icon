@@ -93,9 +93,6 @@ public class AndroidDynamicIconPlugin implements FlutterPlugin, ActivityAware {
 
     @Override
     public void onPause(@NonNull LifecycleOwner owner) {
-      Log.i("ChangeIcon", "The app has paused");
-      handler.updateIcon();
-    
     }
 
     @Override
