@@ -5,7 +5,10 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.util.Log;
+
+import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +54,7 @@ public class IconUtils {
         intent.putStringArrayListExtra("classNames", new ArrayList<>(classNames));
         intent.putStringArrayListExtra("args", new ArrayList<>(args));
 
-        activity.startService(intent);
+        ContextCompat.startForegroundService(activity, intent);
     }
 
 
